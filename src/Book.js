@@ -8,9 +8,9 @@ function Book(props) {
         <div className='book-shelf-changer'>
           <select>
             <option value='move' disabled>Move to...</option>
-            <option value='currentlyReading'>Currently Reading</option>
-            <option value='wantToRead'>Want to Read</option>
-            <option value='read'>Read</option>
+            <option value='currentlyReading' selected={props.book.shelf === 'currentlyReading'}>Currently Reading</option>
+            <option value='wantToRead' selected={props.book.shelf === 'wantToRead'}>Want to Read</option>
+            <option value='read' selected={props.book.shelf === 'read'}>Read</option>
             <option value='none'>None</option>
           </select>
         </div>  

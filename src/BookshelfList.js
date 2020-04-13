@@ -14,8 +14,8 @@ class BookshelfList extends Component {
   }
 
   render() {
-    const shelves = ["wantToRead", "currentlyReading", "read"];
-    console.log(this.state.books);
+    const shelves = ["currentlyReading", "wantToRead", "read"]
+
     return (
       <div className='list-books'>
         <div className='list-books-title'>
@@ -23,7 +23,15 @@ class BookshelfList extends Component {
         </div>
         <div className='list-books-content'>
           <div>
-            {shelves.map((shelf) => <Bookshelf key={shelf} name={shelf} books={this.state.books.filter((book) => book.shelf === shelf)} />)}
+            {
+              shelves.map((shelf) =>
+                <Bookshelf
+                  key={shelf}
+                  name={shelf}
+                  books={this.state.books.filter((book) => book.shelf === shelf)}
+                />
+              )
+            }
           </div>
         </div>
         <div className='open-search'>
