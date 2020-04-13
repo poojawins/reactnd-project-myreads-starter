@@ -23,7 +23,11 @@ class BookshelfList extends Component {
   }
 
   render() {
-    const shelves = ["currentlyReading", "wantToRead", "read"]
+    const shelves = [
+      {id: 'currentlyReading', label: 'Currently Reading'},
+      {id: 'wantToRead', label: 'Want to Read'},
+      {id: 'read', label: 'Read'}
+    ]
 
     return (
       <div className='list-books'>
@@ -35,9 +39,9 @@ class BookshelfList extends Component {
             {
               shelves.map((shelf) =>
                 <Bookshelf
-                  key={shelf}
-                  name={shelf}
-                  books={this.state.books.filter((book) => book.shelf === shelf)}
+                  key={shelf.id}
+                  name={shelf.label}
+                  books={this.state.books.filter((book) => book.shelf === shelf.id)}
                   onChange={this.updateBookshelf.bind(this)}
                 />
               )
