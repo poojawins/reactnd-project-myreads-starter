@@ -18,7 +18,7 @@ class SearchResults extends Component {
       this.clearResults()
     } else {
       BooksAPI.search(query).then((results) => {
-        results.map((result) => {
+        results.forEach((result) => {
           let book = this.props.books.find((book) => book.id === result.id)
           result.shelf = book ? book.shelf : 'none'
         })
