@@ -1,7 +1,7 @@
 import React from 'react'
-import Bookshelf from './Bookshelf'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Bookshelf from './Bookshelf'
 
 function BookshelfList(props) {
   const shelves = [

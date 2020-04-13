@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Book from './Book'
-import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
+import Book from './Book'
 
 class SearchResults extends Component {
   state = {
@@ -18,11 +18,15 @@ class SearchResults extends Component {
       this.clearResults()
     } else {
       BooksAPI.search(query).then((results) => {
-        results.forEach((result) => {
-          let book = this.props.books.find((book) => book.id === result.id)
-          result.shelf = book ? book.shelf : 'none'
-        })
-        this.setState({results: results})
+        if (results.error) {
+          this.clearResults()
+        } else {
+          results.forEach((result) => {
+            let book = this.props.books.find((book) => book.id === result.id)
+            result.shelf = book ? book.shelf : 'none'
+          })
+          this.setState({results: results})
+        }
       })
     }
   }
