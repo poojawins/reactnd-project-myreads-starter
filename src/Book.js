@@ -5,7 +5,7 @@ function Book(props) {
   return(
     <div className='book'>
       <div className='book-top'>
-        <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.thumbnail})` }}></div>
+        <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks && props.book.imageLinks.thumbnail})` }}></div>
         <div className='book-shelf-changer'>
           <select defaultValue={props.book.shelf} onChange={(event) => props.onChange(props.book, event.target.value)}>
             <option value='move' disabled>Move to...</option>
