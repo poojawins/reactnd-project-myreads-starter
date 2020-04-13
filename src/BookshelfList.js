@@ -9,9 +9,17 @@ class BookshelfList extends Component {
   }
 
   componentDidMount() {
+    this.getBooks()
+  }
+
+  getBooks() {
     BooksAPI.getAll().then((books) => this.setState({
       books: books
     }))
+  }
+
+  updateBookshelf(book, shelf) {
+    BooksAPI.update(book, shelf).then((book) => this.getBooks())
   }
 
   render() {
@@ -30,6 +38,7 @@ class BookshelfList extends Component {
                   key={shelf}
                   name={shelf}
                   books={this.state.books.filter((book) => book.shelf === shelf)}
+                  onChange={this.updateBookshelf.bind(this)}
                 />
               )
             }
