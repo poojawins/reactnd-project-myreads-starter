@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Book(props) {
   return(
@@ -19,6 +20,11 @@ function Book(props) {
       <div className='book-authors'>{props.book.authors}</div>
     </div>
   )
+}
+
+Book.propTypes = {
+  book: PropTypes.object,
+  onChange: PropTypes.func
 }
 
 export default Book
