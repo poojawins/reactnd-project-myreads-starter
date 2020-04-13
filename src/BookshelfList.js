@@ -2,6 +2,9 @@ import React from 'react'
 import Bookshelf from './Bookshelf'
 
 function BookshelfList(props) {
+
+  const shelves = ["wantToRead", "currentlyReading", "read"]
+
   return (
     <div className='list-books'>
       <div className='list-books-title'>
@@ -9,7 +12,7 @@ function BookshelfList(props) {
       </div>
       <div className='list-books-content'>
         <div>
-          Bookshelves are here
+          {shelves.map((shelf) => <Bookshelf key={shelf} name={shelf} />)}
         </div>
       </div>
       <div className='open-search'>

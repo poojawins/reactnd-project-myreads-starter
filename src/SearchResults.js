@@ -15,6 +15,7 @@ function SearchResults(props) {
       </div>
       <div className='search-books-results'>
         <ol className='books-grid'>
+          <Book />
         </ol>
       </div>
     </div>
