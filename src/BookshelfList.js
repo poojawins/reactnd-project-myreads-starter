@@ -1,25 +1,37 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Bookshelf from './Bookshelf'
+import * as BooksAPI from './BooksAPI'
 
-function BookshelfList(props) {
+class BookshelfList extends Component {
+  state = {
+    books: []
+  }
 
-  const shelves = ["wantToRead", "currentlyReading", "read"]
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => this.setState({
+      books: books
+    }))
+  }
 
-  return (
-    <div className='list-books'>
-      <div className='list-books-title'>
-        <h1>MyReads</h1>
-      </div>
-      <div className='list-books-content'>
-        <div>
-          {shelves.map((shelf) => <Bookshelf key={shelf} name={shelf} />)}
+  render() {
+    const shelves = ["wantToRead", "currentlyReading", "read"];
+    console.log(this.state.books);
+    return (
+      <div className='list-books'>
+        <div className='list-books-title'>
+          <h1>MyReads</h1>
+        </div>
+        <div className='list-books-content'>
+          <div>
+            {shelves.map((shelf) => <Bookshelf key={shelf} name={shelf} books={this.state.books.filter((book) => book.shelf === shelf)} />)}
+          </div>
+        </div>
+        <div className='open-search'>
+          <button>Add a book</button>
         </div>
       </div>
-      <div className='open-search'>
-        <button>Add a book</button>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default BookshelfList
