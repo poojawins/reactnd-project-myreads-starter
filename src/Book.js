@@ -7,7 +7,7 @@ function Book(props) {
       <div className='book-top'>
         <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks && props.book.imageLinks.thumbnail})` }}></div>
         <div className='book-shelf-changer'>
-          <select defaultValue={props.book.shelf} onChange={(event) => props.onChange(props.book, event.target.value)}>
+          <select defaultValue={props.shelf} onChange={(event) => props.onChange(props.book, event.target.value)}>
             <option value='move' disabled>Move to...</option>
             <option value='currentlyReading'>Currently Reading</option>
             <option value='wantToRead'>Want to Read</option>
@@ -24,6 +24,8 @@ function Book(props) {
 
 Book.propTypes = {
   book: PropTypes.object,
+  shelf: PropTypes.string,
+  getBooks: PropTypes.func,
   onChange: PropTypes.func
 }
 

@@ -2,28 +2,29 @@ import React, { Component } from 'react'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class SearchResults extends Component {
   state = {
-    books: []
+    results: []
+  }
+
+  clearResults = () => {
+    this.setState({results: []})
   }
 
   search = (query) => {
     if (query === '') {
       this.clearResults()
     } else {
-      BooksAPI.search(query).then((books) => this.setState({
-        books: books
-      }))
+      BooksAPI.search(query).then((results) => {
+        results.map((result) => {
+          let book = this.props.books.find((book) => book.id === result.id)
+          result.shelf = book ? book.shelf : 'none'
+        })
+        this.setState({results: results})
+      })
     }
-  }
-
-  clearResults = () => {
-    this.setState({books: []})
-  }
-
-  updateBookshelf(book, shelf) {
-    BooksAPI.update(book, shelf)
   }
 
   render() {
@@ -41,12 +42,27 @@ class SearchResults extends Component {
         </div>
         <div className='search-books-results'>
           <ol className='books-grid'>
-            {this.state.books.length > 0 && this.state.books.map((book) => <li key={book.id}><Book book={book} onChange={this.updateBookshelf.bind(this)} /></li>)}
+            {this.state.results.length > 0 && this.state.results.map((result) =>
+              <li key={result.id}>
+                <Book
+                  book={result}
+                  shelf={result.shelf}
+                  getBooks={this.props.getBooks}
+                  onChange={this.props.onChange}
+                />
+              </li>
+            )}
           </ol>
         </div>
       </div>
     )
   }
+}
+
+SearchResults.propTypes = {
+  books: PropTypes.array,
+  getBooks: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 export default SearchResults
